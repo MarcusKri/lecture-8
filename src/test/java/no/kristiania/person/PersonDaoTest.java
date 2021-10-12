@@ -1,10 +1,12 @@
 package no.kristiania.person;
 
 import org.junit.jupiter.api.Test;
+import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.sql.DataSource;
 
 import java.sql.SQLException;
+import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,10 +26,21 @@ public class PersonDaoTest {
     }
 
     private Person examplePerson() {
-        return new Person();
+        Person person = new Person();
+        person.setFirstName(pickOne("Johannes", "Julie", "Josephine", "Jamie"));
+        person.setLastName(pickOne("Persson", "Kristoffersen", "Jada", "Blabla"));
+        return person;
+    }
+
+    public static String pickOne(String... alternatives) {
+        return alternatives[new Random().nextInt(alternatives.length)];
     }
 
     private DataSource createDataSource() {
-        return null;
+        PGSimpleDataSource dataSource = new PGSimpleDataSource();
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/person_db");
+        dataSource.setUser("person_dbuser");
+        dataSource.setPassword("z=jNE9MY=f5^$WfK5/");
+        return dataSource;
     }
 }
