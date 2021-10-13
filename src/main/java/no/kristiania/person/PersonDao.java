@@ -2,6 +2,7 @@ package no.kristiania.person;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.List;
 
 public class PersonDao {
 
@@ -30,7 +31,6 @@ public class PersonDao {
                }
            }
         }
-        this.person = person;
     }
 
     //Long id kan settes til = null
@@ -55,5 +55,10 @@ public class PersonDao {
                 }
             }
         }
+    }
+
+    public List<Person> listByLastName(String lastName) {
+        return null;
+
     }
 }
