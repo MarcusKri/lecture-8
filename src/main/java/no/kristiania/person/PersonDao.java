@@ -76,9 +76,9 @@ public class PersonDao {
 
         try (Connection connection = dataSource.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(
-                    "select * from people where last_name = ?"
+                    "select * from people where last_name = '" + lastName + "'"
             )) {
-                statement.setString(1, lastName);
+                //statement.setString(1, lastName);
 
                 try (ResultSet rs = statement.executeQuery()) {
                     ArrayList<Person> people = new ArrayList<>();
